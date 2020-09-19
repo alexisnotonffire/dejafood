@@ -12,6 +12,7 @@ public class Farm : MonoBehaviour
     Tilemap tmap;
     Ledger ledger;
     Trader trader;
+    public GameObject fieldDialogObj;
     Dictionary<Vector3Int, Field> fields = new Dictionary<Vector3Int, Field>();
     public void NextTurn()
     {
@@ -40,15 +41,28 @@ public class Farm : MonoBehaviour
     }
     void OnTileSelect()
     {
-        // if (!Input.GetMouseButtonDown(0) || !EventSystem.current.IsPointerOverGameObject()) { return; }
-        // Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Vector3Int tilePos = Vector3Int.RoundToInt(pos);
-        // Field f;
-        // fields.TryGetValue(tilePos, out f);
-        // if (f == null) { 
-        //     f = new Field(InitDialog("Field", null));
+        if (!Input.GetMouseButtonDown(0)) { return; } 
+        if (EventSystem.current.IsPointerOverGameObject()) { 
+            Debug.Log("offtile click: " + Input.GetMouseButtonDown(0).ToString() + EventSystem.current.IsPointerOverGameObject());
+            return; 
+        }
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int tilePos = Vector3Int.RoundToInt(pos);
+        Debug.Log("tile click: " + tilePos.ToString());
+        // if (tmap.GetTile(tilePos) == null) { 
+        //     Debug.Log("no tile at: " + tilePos.ToString());
+        //     return; 
         // }
-        // f.OnClick();
+
+        Field f;
+        fields.TryGetValue(tilePos, out f);
+        if (f == null) { 
+            f = new Field(fieldDialogObj);
+            fields.Add(tilePos, f);
+            Debug.Log("registered fields: " + fields.Count);
+        }
+        Debug.Log("clicked field: " + f.ToString());
+        f.OnClick();
     }
     void Awake()
     {
