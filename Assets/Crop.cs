@@ -1,14 +1,11 @@
 using System;
-public class Crop : IShopItem, IButton
+public class Crop : IShopItem
 {
     public string Name {get;}
     int Age {get;}
     int HarvestAge {get;}
     int Value {get;}
     public int Cost {get;}
-
-    public void OnClick(){}
-
     public T OnPurchase<T>()
     {
         Type pType = typeof(T);
