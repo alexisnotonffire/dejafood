@@ -16,9 +16,9 @@ public class UIDialog : MonoBehaviour
         gameObject.SetActive(false);
     }
     
-    public void ShowPanel(List<IButton> buttons)
+    public void ShowPanel()
     {
-        SetButtons(buttons ?? buttonLister.Buttons);
+        SetButtons(buttonLister.Buttons);
         gameObject.SetActive(true);
     }
 

@@ -40,15 +40,15 @@ public class Farm : MonoBehaviour
     }
     void OnTileSelect()
     {
-        if (!Input.GetMouseButtonDown(0) || !EventSystem.current.IsPointerOverGameObject()) { return; }
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int tilePos = Vector3Int.RoundToInt(pos);
-        Field f;
-        fields.TryGetValue(tilePos, out f);
-        if (f == null) { 
-            f = new Field(InitDialog("Field", null));
-        }
-        f.OnClick();
+        // if (!Input.GetMouseButtonDown(0) || !EventSystem.current.IsPointerOverGameObject()) { return; }
+        // Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Vector3Int tilePos = Vector3Int.RoundToInt(pos);
+        // Field f;
+        // fields.TryGetValue(tilePos, out f);
+        // if (f == null) { 
+        //     f = new Field(InitDialog("Field", null));
+        // }
+        // f.OnClick();
     }
     void Awake()
     {

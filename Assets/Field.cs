@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class Field
+public class Field : IUIButtonLister
 {
     GameObject dialogObj;
     UIDialog dialog;
     Crop crop;
     List<IButton> actions;
+    public List<IButton> Buttons { get { return actions; } }
+
     void UpdateActions()
     {
         if (crop == null)
@@ -16,7 +18,8 @@ public class Field
     public void OnClick()
     {
         UpdateActions();
-        dialog.ShowPanel(actions);
+        dialog.buttonLister = this;
+        dialog.ShowPanel();
     }
     public Field(GameObject dialogObj)
     {
