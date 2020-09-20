@@ -5,7 +5,7 @@ using UnityEngine.U2D;
 public class Crop
 {
     public string Name {get;}
-    int Age {get;}
+    int Age {get;set;}
     int HarvestAge {get;}
     int Value {get;}
     public int Cost {get;}
@@ -15,6 +15,11 @@ public class Crop
         "age",
         "ready"
     };
+    public Sprite NextTurn()
+    {
+        Age++;
+        return GetSprite();
+    }
     public Sprite GetSprite()
     {
         if (Age == HarvestAge) { return sprites[sprites.Count]; }

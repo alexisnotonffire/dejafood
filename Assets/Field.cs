@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 public class Field
 {
     UIDialog dialog;
     Crop crop;
     List<IButton> actions;
     IButtonLister actionLister;
+    Action updateTile;
+    Vector3Int pos;
+    Tilemap tilemap;
     class ActionLister : IButtonLister 
     {
         public List<IButton> Buttons { get; set; }
@@ -37,9 +42,24 @@ public class Field
     public void AddCrop(Crop crop)
     {
         this.crop = crop;
+        UpdateSprite(crop.GetSprite());
     }
-    public Field(GameObject dialogObj)
+    void UpdateSprite(Sprite sprite)
+    {
+        Tile tile = ScriptableObject.CreateInstance<Tile>();
+        tile.sprite = sprite;
+        tilemap.SetTile(pos, tile);
+    }
+    public void NextTurn()
+    {
+        if (crop == null) { return; }
+        Sprite sprite = crop.NextTurn();
+        UpdateSprite(sprite);
+    }
+    public Field(GameObject dialogObj, Tilemap tilemap, Vector3Int pos)
     {
         this.dialog = dialogObj.GetComponent<UIDialog>();
+        this.tilemap = tilemap;
+        this.pos = pos;
     }
 }

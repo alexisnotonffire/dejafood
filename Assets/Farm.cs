@@ -54,7 +54,7 @@ public class Farm : MonoBehaviour
         {
             Field f;
             if (!fields.TryGetValue(tilePos, out f)) { 
-                f = new Field(fieldDialogObj);
+                f = new Field(fieldDialogObj, tmap, tilePos);
                 fields.Add(tilePos, f);
                 Debug.Log("registered fields: " + fields.Count);
             }
