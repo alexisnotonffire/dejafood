@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-public interface IUIButtonLister
+public interface IButtonLister
 {
     List<IButton> Buttons {get;}
 }

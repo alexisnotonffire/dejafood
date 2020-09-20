@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: game-sprites
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+    totalSpriteSurfaceArea: 12288
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -4853395682948735517, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 8671943525288780636, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -2901389411447681923, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -8732153904082466056, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 7088584524856486376, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5704487261850637066, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -2158776023453496498, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5727107203160394723, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 926820973202709570, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 6600275155333664764, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -7597693978214871114, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 7617126542778600300, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - crop_seed
+  - grass
+  - crop_age
+  - empty_field
+  - wip-sprites_5
+  - wip-sprites_7
+  - wip-sprites_6
+  - wip-sprites_9
+  - wip-sprites_8
+  - player
+  - crop_ready
+  - shop_crop
+  m_Tag: game-sprites
+  m_IsVariant: 0

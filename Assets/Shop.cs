@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-public class Shop : IUIButtonLister
+public class Shop : IButtonLister
 {
     Field field;
     public List<IButton> Buttons {get;} = new List<IButton>();

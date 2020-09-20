@@ -9,7 +9,8 @@ public class Farm : MonoBehaviour
 {
     int turn = 1;
     Text turnCount;
-    Tilemap tmap;
+    public Grid grid;
+    public Tilemap tmap;
     Ledger ledger;
     Trader trader;
     public GameObject fieldDialogObj;
@@ -22,7 +23,7 @@ public class Farm : MonoBehaviour
             turnCount.text = turn.ToString();
         }
     }
-    GameObject InitDialog(string name, IUIButtonLister buttonLister)
+    GameObject InitDialog(string name, IButtonLister buttonLister)
     {
         GameObject dialogObj = GameObject.Find(name);
         if (dialogObj == null)
@@ -47,21 +48,24 @@ public class Farm : MonoBehaviour
             return; 
         }
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int tilePos = Vector3Int.RoundToInt(pos);
+        Vector3Int tilePos = grid.WorldToCell(pos);
         Debug.Log("tile click: " + tilePos.ToString());
-        // if (tmap.GetTile(tilePos) == null) { 
-        //     Debug.Log("no tile at: " + tilePos.ToString());
-        //     return; 
-        // }
-
-        Field f;
-        if (!fields.TryGetValue(tilePos, out f)) { 
-            f = new Field(fieldDialogObj);
-            fields.Add(tilePos, f);
-            Debug.Log("registered fields: " + fields.Count);
+        if (tmap.GetSprite(tilePos).name == "empty_field")
+        {
+            Field f;
+            if (!fields.TryGetValue(tilePos, out f)) { 
+                f = new Field(fieldDialogObj);
+                fields.Add(tilePos, f);
+                Debug.Log("registered fields: " + fields.Count);
+            }
+            Debug.Log("clicked field: " + f.ToString());
+            f.OnClick();
+        } 
+        else 
+        {
+            Debug.Log("no farm tile at: " + tilePos.ToString());
+            return; 
         }
-        Debug.Log("clicked field: " + f.ToString());
-        f.OnClick();
     }
     void Awake()
     {
@@ -73,9 +77,6 @@ public class Farm : MonoBehaviour
 
     void Start()
     {
-        GameObject tmObject = GameObject.Find("Farm/FarmTilemap");
-        tmap = tmObject.GetComponent<Tilemap>();
-
         GameObject tcObject = GameObject.Find("GameInfo/TurnCount/Text");
         turnCount = tcObject.GetComponent<Text>();
     }

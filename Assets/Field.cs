@@ -5,8 +5,8 @@ public class Field
     UIDialog dialog;
     Crop crop;
     List<IButton> actions;
-    IUIButtonLister actionLister;
-    class ActionLister : IUIButtonLister 
+    IButtonLister actionLister;
+    class ActionLister : IButtonLister 
     {
         public List<IButton> Buttons { get; set; }
         public ActionLister(List<IButton> actions)

@@ -4,19 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8732153904082466056
-    second: wip-sprites_0
+    second: empty_field
   - first:
       213: -4853395682948735517
-    second: wip-sprites_1
+    second: crop_seed
   - first:
       213: -2901389411447681923
-    second: wip-sprites_2
+    second: crop_age
   - first:
       213: -7597693978214871114
-    second: wip-sprites_3
+    second: crop_ready
   - first:
       213: 6600275155333664764
-    second: wip-sprites_4
+    second: player
   - first:
       213: 7088584524856486376
     second: wip-sprites_5
@@ -34,10 +34,10 @@ TextureImporter:
     second: wip-sprites_9
   - first:
       213: 8671943525288780636
-    second: wip-sprites_10
+    second: grass
   - first:
       213: 7617126542778600300
-    second: wip-sprites_11
+    second: shop_crop
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -137,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wip-sprites_0
+      name: empty_field
       rect:
         serializedVersion: 2
         x: 0
@@ -162,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_1
+      name: crop_seed
       rect:
         serializedVersion: 2
         x: 32
@@ -187,7 +187,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_2
+      name: crop_age
       rect:
         serializedVersion: 2
         x: 64
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_3
+      name: crop_ready
       rect:
         serializedVersion: 2
         x: 0
@@ -237,7 +237,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_4
+      name: player
       rect:
         serializedVersion: 2
         x: 32
@@ -391,7 +391,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_10
+      name: grass
       rect:
         serializedVersion: 2
         x: 32
@@ -416,7 +416,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wip-sprites_11
+      name: shop_crop
       rect:
         serializedVersion: 2
         x: 64

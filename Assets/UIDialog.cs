@@ -10,7 +10,7 @@ public class UIDialog : MonoBehaviour
     public GameObject closeButton;
     public Text closeText;
     public Text title;
-    public IUIButtonLister buttonLister {get; set;}
+    public IButtonLister buttonLister {get; set;}
     public void HidePanel()
     {
         gameObject.SetActive(false);
