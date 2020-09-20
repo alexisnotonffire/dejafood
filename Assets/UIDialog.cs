@@ -17,8 +17,11 @@ public class UIDialog : MonoBehaviour
     }
     public void ShowPanel()
     {
-        SetButtons(buttonLister.Buttons);
-        Debug.Log("dialog buttons: " + buttonLister.Buttons.ToString());
+        if (buttonLister != null)
+        {
+            SetButtons(buttonLister.Buttons);
+            Debug.Log("dialog buttons: " + buttonLister.Buttons.ToString());
+        }
         gameObject.SetActive(true);
     }
     void Start()

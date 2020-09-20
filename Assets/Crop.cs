@@ -22,7 +22,7 @@ public class Crop
     }
     public Sprite GetSprite()
     {
-        if (Age == HarvestAge) { return sprites[sprites.Count]; }
+        if (Age >= HarvestAge) { return sprites[sprites.Count - 1]; }
         if (Age == 0) { return sprites[0]; }
         return sprites[1];
     }

@@ -22,6 +22,10 @@ public class Farm : MonoBehaviour
             turn++;
             turnCount.text = turn.ToString();
         }
+        foreach (var field in fields)
+        {
+            field.Value.NextTurn();
+        }
     }
     GameObject InitDialog(string name, IButtonLister buttonLister)
     {
