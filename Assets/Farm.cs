@@ -9,9 +9,11 @@ public class Farm : MonoBehaviour
 {
     int turn = 1;
     Text turnCount;
-    Tilemap tmap;
+    public Grid grid;
+    public Tilemap tmap;
     Ledger ledger;
     Trader trader;
+    public GameObject fieldDialogObj;
     Dictionary<Vector3Int, Field> fields = new Dictionary<Vector3Int, Field>();
     public void NextTurn()
     {
@@ -20,8 +22,12 @@ public class Farm : MonoBehaviour
             turn++;
             turnCount.text = turn.ToString();
         }
+        foreach (var field in fields)
+        {
+            field.Value.NextTurn();
+        }
     }
-    GameObject InitDialog(string name, IUIButtonLister buttonLister)
+    GameObject InitDialog(string name, IButtonLister buttonLister)
     {
         GameObject dialogObj = GameObject.Find(name);
         if (dialogObj == null)
@@ -40,15 +46,30 @@ public class Farm : MonoBehaviour
     }
     void OnTileSelect()
     {
-        // if (!Input.GetMouseButtonDown(0) || !EventSystem.current.IsPointerOverGameObject()) { return; }
-        // Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Vector3Int tilePos = Vector3Int.RoundToInt(pos);
-        // Field f;
-        // fields.TryGetValue(tilePos, out f);
-        // if (f == null) { 
-        //     f = new Field(InitDialog("Field", null));
-        // }
-        // f.OnClick();
+        if (!Input.GetMouseButtonDown(0)) { return; } 
+        if (EventSystem.current.IsPointerOverGameObject()) { 
+            Debug.Log("offtile click: " + Input.GetMouseButtonDown(0).ToString() + EventSystem.current.IsPointerOverGameObject());
+            return; 
+        }
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int tilePos = grid.WorldToCell(pos);
+        Debug.Log("tile click: " + tilePos.ToString());
+        if (tmap.GetSprite(tilePos).name == "empty_field")
+        {
+            Field f;
+            if (!fields.TryGetValue(tilePos, out f)) { 
+                f = new Field(fieldDialogObj, tmap, tilePos);
+                fields.Add(tilePos, f);
+                Debug.Log("registered fields: " + fields.Count);
+            }
+            Debug.Log("clicked field: " + f.ToString());
+            f.OnClick();
+        } 
+        else 
+        {
+            Debug.Log("no farm tile at: " + tilePos.ToString());
+            return; 
+        }
     }
     void Awake()
     {
@@ -60,9 +81,6 @@ public class Farm : MonoBehaviour
 
     void Start()
     {
-        GameObject tmObject = GameObject.Find("Farm/FarmTilemap");
-        tmap = tmObject.GetComponent<Tilemap>();
-
         GameObject tcObject = GameObject.Find("GameInfo/TurnCount/Text");
         turnCount = tcObject.GetComponent<Text>();
     }

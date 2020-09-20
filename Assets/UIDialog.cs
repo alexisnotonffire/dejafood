@@ -10,18 +10,20 @@ public class UIDialog : MonoBehaviour
     public GameObject closeButton;
     public Text closeText;
     public Text title;
-    public IUIButtonLister buttonLister {get; set;}
+    public IButtonLister buttonLister {get; set;}
     public void HidePanel()
     {
         gameObject.SetActive(false);
     }
-    
     public void ShowPanel()
     {
-        SetButtons(buttonLister.Buttons);
+        if (buttonLister != null)
+        {
+            SetButtons(buttonLister.Buttons);
+            Debug.Log("dialog buttons: " + buttonLister.Buttons.ToString());
+        }
         gameObject.SetActive(true);
     }
-
     void Start()
     {
         HidePanel();
@@ -29,12 +31,10 @@ public class UIDialog : MonoBehaviour
     public void SetButtons(List<IButton> lib)
     {
         if (lib == null) { return; }
-
         foreach (Transform child in list.transform)
         {
             Destroy(child.gameObject);
         }
-
         foreach (IButton button in lib)
         {
             GameObject b = Instantiate(pfButton);

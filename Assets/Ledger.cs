@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Ledger : IUIButtonLister
+public class Ledger : IButtonLister
 {
     List<IButton> acceptedContracts = new List<IButton>();
     
