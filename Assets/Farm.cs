@@ -55,8 +55,7 @@ public class Farm : MonoBehaviour
         // }
 
         Field f;
-        fields.TryGetValue(tilePos, out f);
-        if (f == null) { 
+        if (!fields.TryGetValue(tilePos, out f)) { 
             f = new Field(fieldDialogObj);
             fields.Add(tilePos, f);
             Debug.Log("registered fields: " + fields.Count);

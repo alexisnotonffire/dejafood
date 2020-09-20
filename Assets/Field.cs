@@ -16,9 +16,13 @@ public class Field
     }
     void UpdateActions()
     {
+        Debug.Log("updating actions");
         if (crop == null)
         {
-            actions = new Shop().Buttons;
+            Shop shop = new Shop(this);
+            Debug.Log("new shop: " + shop.ToString());
+            actions = shop.Buttons;
+            Debug.Log("actions count: " + actions.Count);
         }
         actionLister = new ActionLister(actions);
     }
@@ -29,6 +33,10 @@ public class Field
         Debug.Log("actions: " + actionLister.Buttons.Count);
         Debug.Log("dialog: " + dialog.buttonLister.Buttons.Count);
         dialog.ShowPanel();
+    }
+    public void AddCrop(Crop crop)
+    {
+        this.crop = crop;
     }
     public Field(GameObject dialogObj)
     {
