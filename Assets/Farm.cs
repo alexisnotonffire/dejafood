@@ -39,17 +39,11 @@ public class Farm : MonoBehaviour
                     harvestedCrops.Add(field.Value.HarvestedCrop.Name, 0);
                 }
                 harvestedCrops[field.Value.HarvestedCrop.Name]++;
-                print(field.Value.HarvestedCrop.Name + ": " + harvestedCrops[field.Value.HarvestedCrop.Name]);
             }
         }
-        Debug.Log("Aged all field crops");
-        foreach (var crop in harvestedCrops)
-        {
-            print(crop.Key + ": " + crop.Value);
-        }
-
+        Debug.Log("aged crops");
         turnCausalityBreaches = validateCropFutures();
-        print("causal breaches: " + turnCausalityBreaches.ToString());
+        print("causal breaches: " + turnCausalityBreaches);
         print("accepted contracts: " + ledger.AcceptedContracts.Count);
         List<Contract> dueContracts = ledger.NextTurn(turn);
         print("due contracts: " + dueContracts.Count);
@@ -98,9 +92,9 @@ public class Farm : MonoBehaviour
     }
     int validateCropFutures()
     {
+        var causalityBreaches = 0;
         foreach (Field field in fields.Values)
         {
-            var causalityBreaches = 0;
             var resolvedFields = new List<Field>();
             var resolution = field.GetCausalityBreach(turn - turnsInYear);
             switch (resolution)
