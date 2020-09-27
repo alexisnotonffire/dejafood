@@ -39,6 +39,7 @@ public class Farm : MonoBehaviour
                     harvestedCrops.Add(field.Value.HarvestedCrop.Name, 0);
                 }
                 harvestedCrops[field.Value.HarvestedCrop.Name]++;
+                print(field.Value.HarvestedCrop.Name + ": " + harvestedCrops[field.Value.HarvestedCrop.Name]);
             }
         }
         Debug.Log("Aged all field crops");
@@ -49,23 +50,27 @@ public class Farm : MonoBehaviour
 
         turnCausalityBreaches = validateCropFutures();
         print("causal breaches: " + turnCausalityBreaches.ToString());
+        print("accepted contracts: " + ledger.AcceptedContracts.Count);
         List<Contract> dueContracts = ledger.NextTurn(turn);
-        print("due contracts: " + dueContracts);
+        print("due contracts: " + dueContracts.Count);
         validateDueContracts(dueContracts);
         print("turn start cash: " + cash);
 
     }
     void validateDueContracts(List<Contract> dueContracts)
     {
+        // print("validating");
         foreach (var contract in dueContracts)
         {
+            // print("contract: " + contract.Name);
             bool valid = true;
             foreach (var crop in contract.Crops)
             {
+                // print("crop: " + crop.Key);
                 int harvestedCropCount;
                 if (harvestedCrops.TryGetValue(crop.Key, out harvestedCropCount))
                 {
-                    print("found: " + crop.Key);
+                    // print("found: " + crop.Key);
                     harvestedCropCount -= crop.Value;
                     if (harvestedCropCount >= 0)
                     {
@@ -75,12 +80,16 @@ public class Farm : MonoBehaviour
                 }
                 else
                 {
+                    print("contract: " + contract.Name);
                     print("missing: " + crop.Key);
                     valid = false;
                     break;
                 }
             }
-            if (valid) { cash += contract.Value; }
+            if (valid) { 
+                print("redeemed contract: " + contract.Value);
+                cash += contract.Value; 
+            }
             else { 
                 cash -= (int)(contract.Value * 1.1f);
                 ledger.CancelContract(contract);
@@ -115,11 +124,7 @@ public class Farm : MonoBehaviour
             return null;
         }
         UIDialog dialog = dialogObj.GetComponent<UIDialog>();
-        if (buttonLister == null || buttonLister.Buttons == null)
-        {
-            // Debug.Log(name + "Dialog: buttons not found");
-        }
-        else
+        if (buttonLister != null && buttonLister.Buttons != null)
         {
             dialog.buttonLister = buttonLister;
         }
@@ -150,7 +155,7 @@ public class Farm : MonoBehaviour
                 fields.Add(tilePos, f);
                 // Debug.Log("registered fields: " + fields.Count);
             }
-            Debug.Log("clicked field: " + f.ToString());
+            Debug.Log("clicked field: " + tilePos);
             f.OnClick();
         }
     }

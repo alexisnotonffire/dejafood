@@ -5,7 +5,6 @@ public class Harvest : FieldMenu
 {
     public Harvest(Field field, int turn): base(field)
     {
-        Debug.Log("shop for field: " + field.ToString());
         List<Crop> crops = new List<Crop>(){
             new Crop("Onion", 0, 5, 15, 5),
             new Crop("Potato", 0, 10, 45, 15),

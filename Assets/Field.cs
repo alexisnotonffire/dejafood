@@ -45,30 +45,29 @@ public class Field
         if (crop == null && Input.GetMouseButtonDown(0))
         {
             fieldMenu = new Shop(this);
-            Debug.Log("new shop: " + fieldMenu.ToString());
+            // Debug.Log("new shop: " + fieldMenu.ToString());
         } else if (Input.GetMouseButtonDown(1))
         {
             fieldMenu = new Harvest(this, turn);
-            Debug.Log("new harvest: " + fieldMenu.ToString());
+            // Debug.Log("new harvest: " + fieldMenu.ToString());
         }
         return fieldMenu;
     }
     void UpdateActions()
     {
-        Debug.Log("updating actions");
+        // Debug.Log("updating actions");
         var fieldMenu = getFieldMenu();
         if (fieldMenu != null)
         {
             actions = fieldMenu.Buttons;
         }
-        Debug.Log("actions count: " + actions.Count);
+        // Debug.Log("actions count: " + actions.Count);
         actionLister = new ActionLister(actions);
     }
     public void HarvestCrop(int turn, Crop crop)
     {
-        this.futureCrops.Add(turn, crop.Name);
-        this.HarvestedCrop = crop;
-        Debug.Log("turn: " + turn.ToString() + "\nharvested crop: " + crop.ToString());
+        futureCrops.Add(turn, crop.Name);
+        HarvestedCrop = crop;
     }
     public string GetCropName(){
         return crop.Name;
@@ -81,8 +80,8 @@ public class Field
     {
         UpdateActions();
         dialog.buttonLister = actionLister;
-        Debug.Log("actions: " + actionLister.Buttons.Count);
-        Debug.Log("dialog: " + dialog.buttonLister.Buttons.Count);
+        // Debug.Log("actions: " + actionLister.Buttons.Count);
+        // Debug.Log("dialog: " + dialog.buttonLister.Buttons.Count);
         dialog.ShowPanel();
     }
     public void AddCrop(Crop crop)
@@ -98,7 +97,7 @@ public class Field
     }
     public void NextTurn()
     {
-        this.turn++;
+        turn++;
         if (crop == null) { return; }
         Sprite sprite = crop.NextTurn();
         UpdateSprite(sprite);

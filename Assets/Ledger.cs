@@ -8,10 +8,12 @@ public class Ledger : IButtonLister
     public void AcceptContract(Contract contract)
     {
         AcceptedContracts.Add(contract);
+        Debug.Log("accepted contract: " + contract.Name);
     }
     public void CancelContract(Contract contract)
     {
         AcceptedContracts.RemoveAll(c => c.Name == contract.Name);
+        Debug.Log("cancelled contract: " + contract.Name);
     }
     public List<IButton> Buttons
     {
