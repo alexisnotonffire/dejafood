@@ -1,16 +1,13 @@
 using System;
-public class ShopItem : IButton
+public class ShopItem : FieldMenuItem
 {
-    public string Name {get;}
-    int Cost {get;}
-    public void OnClick(){
-        OnPurchase();
-    }
-    Action OnPurchase;
-    public ShopItem(string name, int cost, Action purchaseFunc)
+    Crop crop;
+
+    private int GetCost()
+    { return crop.Cost; }
+    override public void OnClick() => base.field.AddCrop(crop);
+    public ShopItem(Crop crop, Field field): base(crop.Name, field)
     {
-        Name = name;
-        Cost = cost;
-        OnPurchase = purchaseFunc;
+        this.crop = crop;
     }
 }

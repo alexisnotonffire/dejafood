@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 public class Trader : IButtonLister
 {
-    private List<Contract> availableContracts;
+    List<Contract> availableContracts;
     public List<Contract> AvailableContracts { get { return availableContracts; } }
     int maxContracts = 3;
     Ledger ledger;

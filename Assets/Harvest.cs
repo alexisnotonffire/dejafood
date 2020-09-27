@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-public class Shop : FieldMenu
+public class Harvest : FieldMenu
 {
-    public Shop(Field field): base(field)
+    public Harvest(Field field, int turn): base(field)
     {
         Debug.Log("shop for field: " + field.ToString());
         List<Crop> crops = new List<Crop>(){
@@ -13,8 +13,9 @@ public class Shop : FieldMenu
         foreach (Crop crop in crops)
         {
             Buttons.Add(
-                new ShopItem(
+                new HarvestItem(
                     crop,
+                    turn,
                     field
                 )
             );
