@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.U2D;
 public class Field
 {
+    Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
     UIDialog dialog;
     Crop crop;
     public Crop HarvestedCrop;
@@ -29,14 +31,19 @@ public class Field
         // 0: Resolved
         // -1: No futures
         string expectedCrop;
-        if (!futureCrops.TryGetValue(turn, out expectedCrop))
+        Debug.Log("future crops: " + futureCrops.Count);
+        if (futureCrops.TryGetValue(turn, out expectedCrop))
         {
+            Debug.Log("expected crop: " + expectedCrop);
             if (crop == null || expectedCrop != crop.Name)
             {
+                Debug.Log("missing: " + expectedCrop);
                 return 1;
             }
+            Debug.Log("found: " + crop.Name);
             return 0;
         }
+        Debug.Log("no future crop");
         return -1;
     }
     FieldMenu getFieldMenu()
@@ -67,6 +74,7 @@ public class Field
     public void HarvestCrop(int turn, Crop crop)
     {
         futureCrops.Add(turn, crop.Name);
+        Debug.Log("resolve one year from: " + turn);
         HarvestedCrop = crop;
     }
     public string GetCropName(){
@@ -75,6 +83,7 @@ public class Field
     public void DeleteCrop()
     {
         crop = null;
+        UpdateSprite(sprites["empty_field"]);
     }
     public void OnClick()
     {
@@ -107,5 +116,8 @@ public class Field
         this.dialog = dialogObj.GetComponent<UIDialog>();
         this.tilemap = tilemap;
         this.pos = pos;
+
+        SpriteAtlas atlas = Resources.Load<SpriteAtlas>("game-sprites");
+        sprites.Add("empty_field", atlas.GetSprite("empty_field"));
     }
 }
