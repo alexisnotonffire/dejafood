@@ -20,7 +20,6 @@ public class UIDialog : MonoBehaviour
         if (buttonLister != null)
         {
             SetButtons(buttonLister.Buttons);
-            Debug.Log("dialog buttons: " + buttonLister.Buttons.ToString());
         }
         gameObject.SetActive(true);
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 public class Trader : IButtonLister
 {
-    private List<Contract> availableContracts;
+    List<Contract> availableContracts;
     public List<Contract> AvailableContracts { get { return availableContracts; } }
     int maxContracts = 3;
     Ledger ledger;
@@ -17,7 +17,7 @@ public class Trader : IButtonLister
         {
             int value = 5;
             Dictionary<string,int> crops = new Dictionary<string, int>(){
-               {"onion", 5}
+               {"Onion", 5}
             };
             availableContracts.Add(
                 new Contract(counter.ToString(), value, crops, ledger)
@@ -26,9 +26,9 @@ public class Trader : IButtonLister
         }
     }
 
-    public Trader(Ledger l)
+    public Trader(Ledger ledger)
     {
-        this.ledger = l;
+        this.ledger = ledger;
         RefreshContracts();
     }
 }
