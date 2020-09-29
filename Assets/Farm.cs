@@ -44,6 +44,12 @@ public class Farm : MonoBehaviour
         }
         Debug.Log("aged crops");
         turnCausalityBreaches = validateCropFutures();
+        causalityBreaches += turnCausalityBreaches;
+        if (causalityBreaches >= 5)
+        {
+            SceneController.EndGame();
+            return;
+        }
         print("causal breaches: " + turnCausalityBreaches);
         print("accepted contracts: " + ledger.AcceptedContracts.Count);
         List<Contract> dueContracts = ledger.NextTurn(turn);
