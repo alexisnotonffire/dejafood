@@ -25,6 +25,8 @@ public class UIDialog : MonoBehaviour
     }
     void Start()
     {
+        var button = transform.Find("Panel/CloseButton").GetComponent<Button>();
+        button.onClick.AddListener(() => HidePanel());
         HidePanel();
     }
     public void SetButtons(List<IButton> lib)
@@ -39,6 +41,10 @@ public class UIDialog : MonoBehaviour
             GameObject b = Instantiate(pfButton);
             Text t = b.transform.Find("Text").GetComponent<Text>();
             t.text = button.Name;
+            if (button.Desc != null && button.Desc != "")
+            {
+                t.text += "\n" + button.Desc;
+            }
 
             Button cButton = b.GetComponent<Button>();
             cButton.onClick.AddListener(() => button.OnClick());

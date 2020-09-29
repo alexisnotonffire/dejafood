@@ -6,6 +6,7 @@ public class Contract : IButton
 {
     Ledger ledger;
     public string Name {get;}
+    public string Desc {get;}
     public int Value {get;}
     int Due {get;}
     public Dictionary<string,int> Crops {get;}
@@ -23,5 +24,6 @@ public class Contract : IButton
         Value = v;
         Crops = c;
         ledger = l;
+        Desc = string.Format("Value: {0:N0}", v);
     }
 }
