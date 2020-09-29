@@ -17,6 +17,7 @@ public class Farm : MonoBehaviour
     Ledger ledger;
     Trader trader;
     public GameObject fieldDialogObj;
+    public GameObject turnDialogObj;
     Dictionary<string, int> harvestedCrops = new Dictionary<string, int>();
     Dictionary<Vector3Int, Field> fields = new Dictionary<Vector3Int, Field>();
     int causalityBreaches = 0;
@@ -49,7 +50,7 @@ public class Farm : MonoBehaviour
         print("due contracts: " + dueContracts.Count);
         validateDueContracts(dueContracts);
         print("turn start cash: " + cash);
-
+        updateTurnSummary();
     }
     void validateDueContracts(List<Contract> dueContracts)
     {
@@ -108,6 +109,12 @@ public class Farm : MonoBehaviour
             }
         }
         return causalityBreaches;
+    }
+    void updateTurnSummary()
+    {
+        UIDialog turnDialog = turnDialogObj.GetComponent<UIDialog>();
+        turnDialog.title.text = string.Format("Year: {0:N0} | Week: {1:N0}", (turn / 15) + 1, turn % 15);
+        turnDialog.buttonLister = new Turn(cash, causalityBreaches);
     }
     GameObject InitDialog(string name, IButtonLister buttonLister)
     {
