@@ -5,6 +5,10 @@ using UnityEngine;
 public class Ledger : IButtonLister
 {
     public List<Contract> AcceptedContracts = new List<Contract>();
+    public List<IButton> Buttons
+    {
+        get { return AcceptedContracts.Cast<IButton>().ToList(); }
+    }
     public void AcceptContract(Contract contract)
     {
         AcceptedContracts.Add(contract);
@@ -14,10 +18,6 @@ public class Ledger : IButtonLister
     {
         AcceptedContracts.RemoveAll(c => c.Name == contract.Name);
         Debug.Log("cancelled contract: " + contract.Name);
-    }
-    public List<IButton> Buttons
-    {
-        get { return AcceptedContracts.Cast<IButton>().ToList(); }
     }
     public List<Contract> NextTurn(int turn)
     {

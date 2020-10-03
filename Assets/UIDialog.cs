@@ -11,8 +11,19 @@ public class UIDialog : MonoBehaviour
     public Text closeText;
     public Text title;
     public IButtonLister buttonLister {get; set;}
+    void Awake()
+    {
+        print(title.text + ": awake");
+        var button = transform.Find("Panel/CloseButton").GetComponent<Button>();
+        button.onClick.AddListener(() => HidePanel());
+    }
+    void Start()
+    {
+        print(title.text + ": start");
+    }
     public void HidePanel()
     {
+        print(title + ": disabled");
         gameObject.SetActive(false);
     }
     public void ShowPanel()
@@ -22,12 +33,6 @@ public class UIDialog : MonoBehaviour
             SetButtons(buttonLister.Buttons);
         }
         gameObject.SetActive(true);
-    }
-    void Start()
-    {
-        var button = transform.Find("Panel/CloseButton").GetComponent<Button>();
-        button.onClick.AddListener(() => HidePanel());
-        HidePanel();
     }
     public void SetButtons(List<IButton> lib)
     {

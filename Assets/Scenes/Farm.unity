@@ -695,11 +695,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -949,6 +949,10 @@ PrefabInstance:
     - target: {fileID: 8199419099307901660, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199419099307901661, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
+      propertyPath: m_Text
+      value: Turn Summary
       objectReference: {fileID: 0}
     - target: {fileID: 8522022879837694642, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1292,18 +1296,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8199419097976028992, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8199419097976028992, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8199419097976028992, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8199419097976028999, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_Name
       value: Ledger
@@ -1331,6 +1323,10 @@ PrefabInstance:
     - target: {fileID: 8199419099307901660, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199419099307901661, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
+      propertyPath: m_Text
+      value: Ledger
       objectReference: {fileID: 0}
     - target: {fileID: 8522022879837694642, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1608,6 +1604,10 @@ PrefabInstance:
     - target: {fileID: 8199419099307901660, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199419099307901661, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
+      propertyPath: m_Text
+      value: Field
       objectReference: {fileID: 0}
     - target: {fileID: 8442817012512390311, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1909,6 +1909,10 @@ PrefabInstance:
     - target: {fileID: 8199419099307901660, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199419099307901661, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
+      propertyPath: m_Text
+      value: Trader
       objectReference: {fileID: 0}
     - target: {fileID: 8442817012512390311, guid: e3f0bdf54e8d9584b9a770d609f64307, type: 3}
       propertyPath: m_AnchorMin.y
@@ -3399,9 +3403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94de70f46640ea47bd1c50c50606501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fieldDialogObj: {fileID: 1746853522}
   grid: {fileID: 1532902275}
   tmap: {fileID: 71647046}
-  fieldDialogObj: {fileID: 1746853522}
   turnDialogObj: {fileID: 837065838}
 --- !u!1001 &1638487011
 PrefabInstance:
