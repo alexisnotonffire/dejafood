@@ -50,14 +50,10 @@ public class Farm : MonoBehaviour
     {
         print("turn end cash: " + cash);
         int turnCausalityBreaches = 0;
-        if (turnCount != null)
-        {
-            turn++;
-            turnCount.text = turn.ToString();
-        }
+        turn++;
+        turnCount.text = turn.ToString();
         foreach (var field in fields)
         {
-            field.Value.NextTurn();
             if (field.Value.HarvestedCrop != null)
             {
                 if (!harvestedCrops.ContainsKey(field.Value.HarvestedCrop.Name))
@@ -66,6 +62,7 @@ public class Farm : MonoBehaviour
                 }
                 harvestedCrops[field.Value.HarvestedCrop.Name]++;
             }
+            field.Value.NextTurn();
         }
         Debug.Log("aged crops");
         turnCausalityBreaches = validateCropFutures();
@@ -81,6 +78,12 @@ public class Farm : MonoBehaviour
         print("due contracts: " + dueContracts.Count);
         validateDueContracts(dueContracts);
         print("turn start cash: " + cash);
+        if (cash <= 0)
+        {
+            SceneController.EndGame();
+            return;
+        }
+        trader.NextTurn();
         updateTurnSummary();
     }
     void OnTileSelect()
@@ -130,7 +133,7 @@ public class Farm : MonoBehaviour
     {
         UIDialog turnDialog = turnDialogObj.GetComponent<UIDialog>();
         turnDialog.title.text = string.Format("Year: {0:N0} | Week: {1:N0}", (turn / 15) + 1, turn % 15);
-        turnDialog.buttonLister = new Turn(cash, causalityBreaches);
+        turnDialog.buttonLister = new TurnSummary(cash, causalityBreaches);
     }
     int validateCropFutures()
     {

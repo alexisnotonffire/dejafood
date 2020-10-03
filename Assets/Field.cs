@@ -31,19 +31,14 @@ public class Field
         // 0: Resolved
         // -1: No futures
         string expectedCrop;
-        Debug.Log("future crops: " + futureCrops.Count);
         if (futureCrops.TryGetValue(turn, out expectedCrop))
         {
-            Debug.Log("expected crop: " + expectedCrop);
             if (crop == null || expectedCrop != crop.Name)
             {
-                Debug.Log("missing: " + expectedCrop);
                 return 1;
             }
-            Debug.Log("found: " + crop.Name);
             return 0;
         }
-        Debug.Log("no future crop");
         return -1;
     }
     FieldMenu getFieldMenu()
@@ -53,7 +48,7 @@ public class Field
         {
             fieldMenu = new Shop(this);
             // Debug.Log("new shop: " + fieldMenu.ToString());
-        } else if (Input.GetMouseButtonDown(1))
+        } else if (HarvestedCrop == null && Input.GetMouseButtonDown(1))
         {
             fieldMenu = new Harvest(this, turn);
             // Debug.Log("new harvest: " + fieldMenu.ToString());
@@ -67,6 +62,8 @@ public class Field
         if (fieldMenu != null)
         {
             actions = fieldMenu.Buttons;
+        } else {
+            actions = null;
         }
         // Debug.Log("actions count: " + actions.Count);
         actionLister = new ActionLister(actions);
@@ -88,10 +85,11 @@ public class Field
     public void OnClick()
     {
         UpdateActions();
-        dialog.buttonLister = actionLister;
-        // Debug.Log("actions: " + actionLister.Buttons.Count);
-        // Debug.Log("dialog: " + dialog.buttonLister.Buttons.Count);
-        dialog.ShowPanel();
+        if (actionLister.Buttons != null)
+        {
+            dialog.buttonLister = actionLister;
+            dialog.ShowPanel();
+        }
     }
     public void AddCrop(Crop crop)
     {
@@ -107,6 +105,7 @@ public class Field
     public void NextTurn()
     {
         turn++;
+        HarvestedCrop = null;
         if (crop == null) { return; }
         Sprite sprite = crop.NextTurn();
         UpdateSprite(sprite);

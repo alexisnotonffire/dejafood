@@ -8,8 +8,14 @@ public class Trader : IButtonLister
     public List<Contract> AvailableContracts { get { return availableContracts; } }
     public List<IButton> Buttons { get { return availableContracts.Cast<IButton>().ToList(); } }
     int counter = 1;
+    int turn = 1;
     Ledger ledger;
-    int maxContracts = 3;    
+    int maxContracts = 3;   
+    public void NextTurn()
+    {
+        turn++;
+        RefreshContracts();
+    } 
     public void RefreshContracts()
     {
         availableContracts = new List<Contract>();
@@ -19,8 +25,9 @@ public class Trader : IButtonLister
             Dictionary<string,int> crops = new Dictionary<string, int>(){
                {"Onion", 5}
             };
+            int due = turn + 1;
             availableContracts.Add(
-                new Contract(counter.ToString(), value, crops, ledger)
+                new Contract(counter.ToString(), value, crops, ledger, due)
             );
             counter++;
         }
