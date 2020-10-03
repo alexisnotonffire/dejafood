@@ -16,14 +16,16 @@ public class Contract : IButton
     }
     public bool IsDue(int turn)
     {
-        return true;
+        Debug.Log(turn + ": " + Due);
+        return Due == turn;
     }
-    public Contract(string n, int v, Dictionary<string,int> c, Ledger l)
+    public Contract(string n, int v, Dictionary<string,int> c, Ledger l, int due)
     {
         Name = n;
         Value = v;
         Crops = c;
         ledger = l;
         Desc = string.Format("Value: {0:N0}", v);
+        Due = due;
     }
 }
