@@ -24,6 +24,12 @@ public class Field
             Buttons = actions;
         }
     }
+    enum fieldMenuEnum
+    {
+        Shop,
+        Harvest,
+        None,
+    }
     public int GetCausalityBreach(int turn)
     {
         // Return Codes
@@ -41,32 +47,28 @@ public class Field
         }
         return -1;
     }
-    FieldMenu getFieldMenu()
+    FieldMenu getFieldMenu(fieldMenuEnum fieldMenuType)
     {
         FieldMenu fieldMenu = null;
-        if (crop == null && Input.GetMouseButtonDown(0))
+        switch (fieldMenuType)
         {
-            fieldMenu = new Shop(this);
-            // Debug.Log("new shop: " + fieldMenu.ToString());
-        } else if (HarvestedCrop == null && Input.GetMouseButtonDown(1))
-        {
-            fieldMenu = new Harvest(this, turn);
-            // Debug.Log("new harvest: " + fieldMenu.ToString());
+            case fieldMenuEnum.Shop: 
+                fieldMenu = new Shop(this);
+                break;
+            case fieldMenuEnum.Harvest:
+                fieldMenu = new Harvest(this, turn);
+                break;
         }
         return fieldMenu;
     }
-    void UpdateActions()
+    void UpdateUIDialog(FieldMenu fieldMenu)
     {
-        // Debug.Log("updating actions");
-        var fieldMenu = getFieldMenu();
         if (fieldMenu != null)
         {
             actions = fieldMenu.Buttons;
-        } else {
-            actions = null;
+            dialog.buttonLister = new ActionLister(fieldMenu.Buttons);
+            dialog.SetTitle(fieldMenu.Name);        
         }
-        // Debug.Log("actions count: " + actions.Count);
-        actionLister = new ActionLister(actions);
     }
     public void HarvestCrop(int turn, Crop crop)
     {
@@ -84,10 +86,20 @@ public class Field
     }
     public void OnClick()
     {
-        UpdateActions();
-        if (actionLister.Buttons != null)
+        var fieldMenuType = fieldMenuEnum.None;
+        if (crop == null && Input.GetMouseButtonDown(0))
         {
-            dialog.buttonLister = actionLister;
+            fieldMenuType = fieldMenuEnum.Shop;
+            // Debug.Log("new shop: " + fieldMenu.ToString());
+        } else if (HarvestedCrop == null && Input.GetMouseButtonDown(1))
+        {
+            fieldMenuType = fieldMenuEnum.Harvest;
+            // Debug.Log("new harvest: " + fieldMenu.ToString());
+        }
+        FieldMenu fieldMenu = getFieldMenu(fieldMenuType);
+        if (fieldMenu != null)
+        {
+            UpdateUIDialog(fieldMenu);
             dialog.ShowPanel();
         }
     }
