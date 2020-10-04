@@ -6,7 +6,7 @@ public class Crop
 {
     public string Name {get;}
     int Age {get;set;}
-    int HarvestAge {get;}
+    public int HarvestAge {get;}
     int Value {get;}
     public int Cost {get;}
     public List<Sprite> sprites = new List<Sprite>();

@@ -34,6 +34,10 @@ public class UIDialog : MonoBehaviour
         }
         gameObject.SetActive(true);
     }
+    public void SetTitle(string title)
+    {
+        this.title.text = title;
+    }
     public void SetButtons(List<IButton> lib)
     {
         if (lib == null) { return; }
