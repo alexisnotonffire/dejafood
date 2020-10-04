@@ -9,7 +9,8 @@ public class Crop
     public int HarvestAge {get;}
     int Value {get;}
     public int Cost {get;}
-    public List<Sprite> sprites = new List<Sprite>();
+    List<Sprite> sprites = new List<Sprite>();
+    public Sprite HarvestSprite;
     List<string> stages = new List<string>(){
         "seed",
         "age",
@@ -38,5 +39,6 @@ public class Crop
         {
             sprites.Add(atlas.GetSprite("crop_" + stage));
         }
+        HarvestSprite = atlas.GetSprite("crop_" + "harvest");
     }
 }

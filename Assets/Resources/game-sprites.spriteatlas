@@ -61,6 +61,6 @@ SpriteAtlas:
   - wip-sprites_8
   - player
   - crop_ready
-  - shop_crop
+  - crop_harvest
   m_Tag: game-sprites
   m_IsVariant: 0
