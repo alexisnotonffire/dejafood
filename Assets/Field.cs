@@ -74,7 +74,8 @@ public class Field
     public void HarvestCrop(int turn, Crop crop)
     {
         futureCrops.Add(turn, crop.Name);
-        Debug.Log("resolve one year from: " + turn);
+        UpdateSprite(crop.HarvestSprite);
+        // Debug.Log("resolve one year from: " + turn);
         HarvestedCrop = crop;
     }
     public string GetCropName(){
@@ -119,10 +120,16 @@ public class Field
     public void NextTurn()
     {
         turn++;
-        HarvestedCrop = null;
-        if (crop == null) { return; }
-        Sprite sprite = crop.NextTurn();
-        UpdateSprite(sprite);
+        if (HarvestedCrop != null)
+        {
+            UpdateSprite(sprites["empty_field"]);
+            HarvestedCrop = null;
+        }
+        if (crop != null)
+        {
+            Sprite sprite = crop.NextTurn();
+            UpdateSprite(sprite);
+        }
     }
     public Field(GameObject dialogObj, Tilemap tilemap, Vector3Int pos, Farm farm)
     {
