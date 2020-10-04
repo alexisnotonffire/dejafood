@@ -15,6 +15,7 @@ public class Field
     Action updateTile;
     Vector3Int pos;
     Tilemap tilemap;
+    Action<int> Charge;
     int turn = 1;
     class ActionLister : IButtonLister 
     {
@@ -93,6 +94,7 @@ public class Field
     }
     public void AddCrop(Crop crop)
     {
+        Charge(crop.Cost);
         this.crop = crop;
         UpdateSprite(crop.GetSprite());
     }
@@ -110,11 +112,12 @@ public class Field
         Sprite sprite = crop.NextTurn();
         UpdateSprite(sprite);
     }
-    public Field(GameObject dialogObj, Tilemap tilemap, Vector3Int pos)
+    public Field(GameObject dialogObj, Tilemap tilemap, Vector3Int pos, Farm farm)
     {
         this.dialog = dialogObj.GetComponent<UIDialog>();
         this.tilemap = tilemap;
         this.pos = pos;
+        this.Charge = farm.Charge;
 
         SpriteAtlas atlas = Resources.Load<SpriteAtlas>("game-sprites");
         sprites.Add("empty_field", atlas.GetSprite("empty_field"));

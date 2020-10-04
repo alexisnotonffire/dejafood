@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
@@ -25,6 +26,10 @@ public class Farm : MonoBehaviour
     {
         this.ledger = new Ledger();
         this.trader = new Trader(ledger);
+    }
+    public void Charge(int amount) 
+    { 
+        this.cash -= amount;
     }
     GameObject InitDialog(string name, IButtonLister buttonLister)
     {
@@ -107,7 +112,7 @@ public class Farm : MonoBehaviour
             Field f;
             if (!fields.TryGetValue(tilePos, out f))
             {
-                f = new Field(fieldDialogObj, tmap, tilePos);
+                f = new Field(fieldDialogObj, tmap, tilePos, this);
                 fields.Add(tilePos, f);
                 // Debug.Log("registered fields: " + fields.Count);
             }
