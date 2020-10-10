@@ -26,6 +26,17 @@ public class UIDialog : MonoBehaviour
         print(title + ": disabled");
         gameObject.SetActive(false);
     }
+    public void SetDialog(string dialog)
+    {
+        GameObject dialogList = transform.Find("Panel").Find("List").gameObject;
+        GameObject dialogTextObj = new GameObject();
+        dialogTextObj.transform.SetParent(dialogList.transform, false);
+        Text dialogText = dialogTextObj.AddComponent<Text>();
+        dialogText.text = dialog; 
+        dialogText.color = Color.black;  
+        dialogText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+
+    }
     public void ShowPanel()
     {
         if (buttonLister != null)

@@ -1,0 +1,17 @@
+Welcome, Rinkswand, to the <i>Temple of Time</i>. 
+
+As we'll tell you in the far off future, we are in need of someone to look after our farmlands and after much negotiation you'll agree to help out. 
+
+Of course, for you, this negotiation has not happened yet. Fear not, this is just how time passes in this land. You'll need to become familiar with these quirks as you tend our fields. 
+
+The concept is simple, you harvest something now and you grow it for the next year. Exactly one year from the harvest date, the timeline will make sure the crop was available for you to harvest. Don't think about it, it doesn't make sense to us either, it just happens.  
+
+The important thing to remember is that one year on from your harvest, there must be a harvestable crop. If not, well, it'll be fine... Probably.
+
+So, what do we need you to do? Well, really just keep the farm ticking over. The regular monks all managed to get themselves lost and it will be a long, long time before they make it back to the temple. While they're gone:
+    1. Collect contracts from the trader
+    2. Harvest [M2] crops to complete contracts 
+    3. Plant [M1] and grow the crops back before it's too late 
+
+We look forward to meeting you,
+<i>Time Monks</i>
