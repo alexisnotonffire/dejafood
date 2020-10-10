@@ -22,6 +22,7 @@ public class Farm : MonoBehaviour
     Text turnCount;
     public GameObject turnDialogObj;
     int turnsInYear = 5;
+    public TextAsset welcomeText;
     void Awake()
     {
         this.ledger = new Ledger();
@@ -31,7 +32,7 @@ public class Farm : MonoBehaviour
     { 
         this.cash -= amount;
     }
-    GameObject InitDialog(string name, IButtonLister buttonLister)
+    GameObject InitDialog(string name, IButtonLister buttonLister, bool startHidden)
     {
         GameObject dialogObj = GameObject.Find("/" + name);
         if (dialogObj == null)
@@ -41,14 +42,14 @@ public class Farm : MonoBehaviour
         }
         print(dialogObj.name + ": " + dialogObj.activeSelf);
         UIDialog dialog = dialogObj.GetComponent<UIDialog>();
-        if (dialog == null)
-        {
-            print(name + ": where's the fucking dialog????");
-        } else if (buttonLister != null && buttonLister.Buttons != null)
+        if (buttonLister != null && buttonLister.Buttons != null)
         {
             dialog.buttonLister = buttonLister;
         }
-        dialog.HidePanel();
+        if (startHidden)
+        {
+            dialog.HidePanel();
+        }
         return dialogObj;
     }
     public void NextTurn()
@@ -125,10 +126,12 @@ public class Farm : MonoBehaviour
         GameObject tcObject = GameObject.Find("GameInfo/TurnCount/Text");
         turnCount = tcObject.GetComponent<Text>();
 
-        InitDialog("Trader", trader);
-        InitDialog("Ledger", ledger);
-        InitDialog("Field", null);
-        InitDialog("Turn", null);
+        InitDialog("Trader", trader, true);
+        InitDialog("Ledger", ledger, true);
+        InitDialog("Field", null, true);
+        InitDialog("Turn", null, true);
+        GameObject welcomeDialog = InitDialog("Welcome", null, false);
+        welcomeDialog.GetComponent<UIDialog>().SetDialog(welcomeText.text);     
     }
     void Update()
     {
