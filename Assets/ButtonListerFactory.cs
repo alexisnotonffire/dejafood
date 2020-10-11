@@ -31,7 +31,10 @@ public class ButtonListerFactory
                 {
                     foreach (KeyValuePair<string, int> item in enumerable)
                     {
-                        buttons.Add(new Button(string.Format("{0} {1}", item.Value, item.Key), null));
+                        if (item.Value > 0)
+                        {
+                            buttons.Add(new Button(string.Format("{0} {1}", item.Value, item.Key), null));
+                        }
                     }
                 }
                 return buttons;

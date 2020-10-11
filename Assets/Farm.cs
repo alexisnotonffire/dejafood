@@ -19,7 +19,9 @@ public class Farm : MonoBehaviour
     public Tilemap tmap;
     Trader trader;
     int turn = 1;
-    Text turnCount;
+    public Text turnCount;
+    public Text cashAmount;
+    public Text causalPoints;
     public GameObject turnDialogObj;
     int turnsInYear = 5;
     public TextAsset welcomeText;
@@ -82,6 +84,7 @@ public class Farm : MonoBehaviour
             return;
         }
         trader.NextTurn();
+        updateInfo();
         updateTurnSummary();
     }
     void OnTileSelect()
@@ -113,10 +116,15 @@ public class Farm : MonoBehaviour
             f.OnClick();
         }
     }
+    void updateInfo()
+    {
+        turnCount.text = string.Format("Turn: {0}", turn);
+        cashAmount.text = string.Format("Cash: {0}", cash);
+        causalPoints.text = string.Format("Causal Breaches: {0}", causalityBreaches);
+    }
     void Start()
     {
-        GameObject tcObject = GameObject.Find("GameInfo/TurnCount/Text");
-        turnCount = tcObject.GetComponent<Text>();
+        updateInfo();
 
         InitDialog("Trader", trader, true);
         InitDialog("Ledger", ledger, true);
@@ -187,6 +195,7 @@ public class Farm : MonoBehaviour
             if (valid) { 
                 print("redeemed contract: " + contract.Value);
                 cash += contract.Value; 
+                ledger.RedeemContract(contract);
             }
             else { 
                 cash -= (int)(contract.Value * 1.1f);
