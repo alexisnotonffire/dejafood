@@ -37,7 +37,7 @@ TextureImporter:
     second: grass
   - first:
       213: 7617126542778600300
-    second: shop_crop
+    second: crop_harvest
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -416,7 +416,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop_crop
+      name: crop_harvest
       rect:
         serializedVersion: 2
         x: 64

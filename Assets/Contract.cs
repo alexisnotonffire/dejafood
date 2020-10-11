@@ -16,14 +16,28 @@ public class Contract : IButton
     }
     public bool IsDue(int turn)
     {
-        return true;
+        Debug.Log(turn + ": " + Due);
+        return Due == turn;
     }
-    public Contract(string n, int v, Dictionary<string,int> c, Ledger l)
+    string formatDesc()
+    {
+        string titleTemplate = "Value: {0} | Due: {1}";
+        string cropTemplate = "{0}: {1}";
+        List<string> lines = new List<string>();
+        lines.Add(string.Format(titleTemplate, Value, Due));
+        foreach (var crop in Crops)
+        {
+            lines.Add(string.Format(cropTemplate, crop.Key, crop.Value));
+        }
+        return string.Join("\n", lines);
+    }
+    public Contract(string n, int v, Dictionary<string,int> c, Ledger l, int due)
     {
         Name = n;
         Value = v;
         Crops = c;
         ledger = l;
-        Desc = string.Format("Value: {0:N0}", v);
+        Desc = formatDesc();
+        Due = due;
     }
 }

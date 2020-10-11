@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
@@ -13,20 +14,27 @@ public class Farm : MonoBehaviour
     Dictionary<Vector3Int, Field> fields = new Dictionary<Vector3Int, Field>();
     public GameObject fieldDialogObj;
     public Grid grid;
-    Dictionary<string, int> harvestedCrops = new Dictionary<string, int>();
+    public Dictionary<string, int> harvestedCrops = new Dictionary<string, int>();
     Ledger ledger;
     public Tilemap tmap;
     Trader trader;
     int turn = 1;
-    Text turnCount;
+    public Text turnCount;
+    public Text cashAmount;
+    public Text causalPoints;
     public GameObject turnDialogObj;
     int turnsInYear = 5;
+    public TextAsset welcomeText;
     void Awake()
     {
         this.ledger = new Ledger();
         this.trader = new Trader(ledger);
     }
-    GameObject InitDialog(string name, IButtonLister buttonLister)
+    public void Charge(int amount) 
+    { 
+        this.cash -= amount;
+    }
+    GameObject InitDialog(string name, IButtonLister buttonLister, bool startHidden)
     {
         GameObject dialogObj = GameObject.Find("/" + name);
         if (dialogObj == null)
@@ -36,36 +44,25 @@ public class Farm : MonoBehaviour
         }
         print(dialogObj.name + ": " + dialogObj.activeSelf);
         UIDialog dialog = dialogObj.GetComponent<UIDialog>();
-        if (dialog == null)
-        {
-            print(name + ": where's the fucking dialog????");
-        } else if (buttonLister != null && buttonLister.Buttons != null)
+        if (buttonLister != null && buttonLister.Buttons != null)
         {
             dialog.buttonLister = buttonLister;
         }
-        dialog.HidePanel();
+        if (startHidden)
+        {
+            dialog.HidePanel();
+        }
         return dialogObj;
     }
     public void NextTurn()
     {
         print("turn end cash: " + cash);
         int turnCausalityBreaches = 0;
-        if (turnCount != null)
-        {
-            turn++;
-            turnCount.text = turn.ToString();
-        }
+        turn++;
+        turnCount.text = turn.ToString();
         foreach (var field in fields)
         {
             field.Value.NextTurn();
-            if (field.Value.HarvestedCrop != null)
-            {
-                if (!harvestedCrops.ContainsKey(field.Value.HarvestedCrop.Name))
-                {
-                    harvestedCrops.Add(field.Value.HarvestedCrop.Name, 0);
-                }
-                harvestedCrops[field.Value.HarvestedCrop.Name]++;
-            }
         }
         Debug.Log("aged crops");
         turnCausalityBreaches = validateCropFutures();
@@ -81,6 +78,13 @@ public class Farm : MonoBehaviour
         print("due contracts: " + dueContracts.Count);
         validateDueContracts(dueContracts);
         print("turn start cash: " + cash);
+        if (cash <= 0)
+        {
+            SceneController.EndGame();
+            return;
+        }
+        trader.NextTurn();
+        updateInfo();
         updateTurnSummary();
     }
     void OnTileSelect()
@@ -104,7 +108,7 @@ public class Farm : MonoBehaviour
             Field f;
             if (!fields.TryGetValue(tilePos, out f))
             {
-                f = new Field(fieldDialogObj, tmap, tilePos);
+                f = new Field(fieldDialogObj, tmap, tilePos, this);
                 fields.Add(tilePos, f);
                 // Debug.Log("registered fields: " + fields.Count);
             }
@@ -112,15 +116,23 @@ public class Farm : MonoBehaviour
             f.OnClick();
         }
     }
+    void updateInfo()
+    {
+        turnCount.text = string.Format("Turn: {0}", turn);
+        cashAmount.text = string.Format("Cash: {0}", cash);
+        causalPoints.text = string.Format("Causal Breaches: {0}", causalityBreaches);
+    }
     void Start()
     {
-        GameObject tcObject = GameObject.Find("GameInfo/TurnCount/Text");
-        turnCount = tcObject.GetComponent<Text>();
+        updateInfo();
 
-        InitDialog("Trader", trader);
-        InitDialog("Ledger", ledger);
-        InitDialog("Field", null);
-        InitDialog("Turn", null);
+        InitDialog("Trader", trader, true);
+        InitDialog("Ledger", ledger, true);
+        InitDialog("Field", null, true);
+        InitDialog("Turn", null, true);
+        InitDialog("CurrentHarvest", ButtonListerFactory.ToButtonLister(harvestedCrops), true);
+        GameObject welcomeDialog = InitDialog("Welcome", null, false);
+        welcomeDialog.GetComponent<UIDialog>().SetDialog(welcomeText.text);     
     }
     void Update()
     {
@@ -130,7 +142,7 @@ public class Farm : MonoBehaviour
     {
         UIDialog turnDialog = turnDialogObj.GetComponent<UIDialog>();
         turnDialog.title.text = string.Format("Year: {0:N0} | Week: {1:N0}", (turn / 15) + 1, turn % 15);
-        turnDialog.buttonLister = new Turn(cash, causalityBreaches);
+        turnDialog.buttonLister = new TurnSummary(cash, causalityBreaches);
     }
     int validateCropFutures()
     {
@@ -183,6 +195,7 @@ public class Farm : MonoBehaviour
             if (valid) { 
                 print("redeemed contract: " + contract.Value);
                 cash += contract.Value; 
+                ledger.RedeemContract(contract);
             }
             else { 
                 cash -= (int)(contract.Value * 1.1f);

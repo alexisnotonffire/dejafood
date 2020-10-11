@@ -6,8 +6,14 @@ public class ShopItem : FieldMenuItem
     private int GetCost()
     { return crop.Cost; }
     override public void OnClick() => base.field.AddCrop(crop);
-    public ShopItem(Crop crop, Field field): base(crop.Name, string.Format("Cost: {0:N0}", crop.Cost), field)
+    string formatDesc()
+    {
+        string template = "Cost: {0} | Turns: {1}";
+        return string.Format(template, crop.Cost, crop.HarvestAge);
+    }
+    public ShopItem(Crop crop, Field field): base(crop.Name, field)
     {
         this.crop = crop;
+        base.Desc = formatDesc();
     }
 }
