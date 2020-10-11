@@ -14,7 +14,7 @@ public class Farm : MonoBehaviour
     Dictionary<Vector3Int, Field> fields = new Dictionary<Vector3Int, Field>();
     public GameObject fieldDialogObj;
     public Grid grid;
-    Dictionary<string, int> harvestedCrops = new Dictionary<string, int>();
+    public Dictionary<string, int> harvestedCrops = new Dictionary<string, int>();
     Ledger ledger;
     public Tilemap tmap;
     Trader trader;
@@ -60,14 +60,6 @@ public class Farm : MonoBehaviour
         turnCount.text = turn.ToString();
         foreach (var field in fields)
         {
-            if (field.Value.HarvestedCrop != null)
-            {
-                if (!harvestedCrops.ContainsKey(field.Value.HarvestedCrop.Name))
-                {
-                    harvestedCrops.Add(field.Value.HarvestedCrop.Name, 0);
-                }
-                harvestedCrops[field.Value.HarvestedCrop.Name]++;
-            }
             field.Value.NextTurn();
         }
         Debug.Log("aged crops");
@@ -130,6 +122,7 @@ public class Farm : MonoBehaviour
         InitDialog("Ledger", ledger, true);
         InitDialog("Field", null, true);
         InitDialog("Turn", null, true);
+        InitDialog("CurrentHarvest", ButtonListerFactory.ToButtonLister(harvestedCrops), true);
         GameObject welcomeDialog = InitDialog("Welcome", null, false);
         welcomeDialog.GetComponent<UIDialog>().SetDialog(welcomeText.text);     
     }

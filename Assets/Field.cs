@@ -9,6 +9,7 @@ public class Field
     UIDialog dialog;
     Crop crop;
     public Crop HarvestedCrop;
+    Dictionary<string,int> farmHarvestedCrops;
     Dictionary<int, string> futureCrops = new Dictionary<int, string>();
     List<IButton> actions;
     IButtonLister actionLister;
@@ -77,6 +78,13 @@ public class Field
         UpdateSprite(crop.HarvestSprite);
         // Debug.Log("resolve one year from: " + turn);
         HarvestedCrop = crop;
+        if (farmHarvestedCrops.TryGetValue(crop.Name, out int a))
+        {
+            farmHarvestedCrops[crop.Name]++;
+        } else 
+        {
+            farmHarvestedCrops.Add(crop.Name, 1);
+        }
     }
     public string GetCropName(){
         return crop.Name;
@@ -137,6 +145,7 @@ public class Field
         this.tilemap = tilemap;
         this.pos = pos;
         this.Charge = farm.Charge;
+        this.farmHarvestedCrops = farm.harvestedCrops;
 
         SpriteAtlas atlas = Resources.Load<SpriteAtlas>("game-sprites");
         sprites.Add("empty_field", atlas.GetSprite("empty_field"));
