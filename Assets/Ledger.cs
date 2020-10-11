@@ -19,6 +19,10 @@ public class Ledger : IButtonLister
         AcceptedContracts.RemoveAll(c => c.Name == contract.Name);
         Debug.Log("cancelled contract: " + contract.Name);
     }
+    public void RedeemContract(Contract contract)
+    {
+        CancelContract(contract);
+    }
     public List<Contract> NextTurn(int turn)
     {
         return AcceptedContracts.Where<Contract>(c => c.IsDue(turn)).ToList();
