@@ -37,8 +37,8 @@ public class Crop
         SpriteAtlas atlas = Resources.Load<SpriteAtlas>("game-sprites");
         foreach (string stage in stages)
         {
-            sprites.Add(atlas.GetSprite("crop_" + stage));
+            sprites.Add(atlas.GetSprite(string.Format("{0}_{1}", n.ToLower(), stage)));
         }
-        HarvestSprite = atlas.GetSprite("crop_" + "harvest");
+        HarvestSprite = atlas.GetSprite(string.Format("{0}_{1}", n.ToLower(), "ready"));
     }
 }
