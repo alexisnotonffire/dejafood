@@ -31,36 +31,48 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-    totalSpriteSurfaceArea: 12288
+    totalSpriteSurfaceArea: 18432
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: -4853395682948735517, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 8671943525288780636, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: -2901389411447681923, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: -8732153904082466056, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 7088584524856486376, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 5704487261850637066, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: -2158776023453496498, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 5727107203160394723, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 926820973202709570, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
   - {fileID: 6600275155333664764, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5727107203160394723, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 8671943525288780636, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -1461149874185309277, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 834866314665816485, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -7951212795150589662, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -8732153904082466056, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5279049361498176464, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 7088584524856486376, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -3094055962461176757, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 926820973202709570, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -2901389411447681923, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -4853395682948735517, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -2158776023453496498, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
   - {fileID: -7597693978214871114, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
-  - {fileID: 7617126542778600300, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5704487261850637066, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: -744376090650209485, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
+  - {fileID: 5595691462002411299, guid: 24cd84ca15b4ade4ca098272fcc3ab9d, type: 3}
   m_PackedSpriteNamesToIndex:
-  - crop_seed
+  - carrot_ready
+  - carrot_age
   - grass
-  - crop_age
+  - carrot_seed
+  - onion_age
+  - grape_ready
   - empty_field
+  - potato_seed
   - wip-sprites_5
-  - wip-sprites_7
-  - wip-sprites_6
-  - wip-sprites_9
-  - wip-sprites_8
-  - player
-  - crop_ready
-  - crop_harvest
+  - onion_seed
+  - tomato_ready
+  - potato_ready
+  - potato_age
+  - tomato_seed
+  - grape_age
+  - tomato_age
+  - onion_ready
+  - grape_seed
   m_Tag: game-sprites
   m_IsVariant: 0
