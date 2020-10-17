@@ -141,7 +141,7 @@ public class Farm : MonoBehaviour
     void updateTurnSummary()
     {
         UIDialog turnDialog = turnDialogObj.GetComponent<UIDialog>();
-        turnDialog.title.text = string.Format("Year: {0:N0} | Week: {1:N0}", (turn / 15) + 1, turn % 15);
+        turnDialog.title.text = string.Format("Year: {0:N0} | Week: {1:N0}", (turn / turnsInYear) + 1, turn % turnsInYear);
         turnDialog.buttonLister = new TurnSummary(cash, causalityBreaches);
     }
     int validateCropFutures()
